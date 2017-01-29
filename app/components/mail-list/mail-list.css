@@ -1,3 +1,7 @@
 .mail-list-item {
     margin-bottom: 15px; 
 }
+
+.mail-title {
+    font-weight: bold;
+}
