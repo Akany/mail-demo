@@ -2,25 +2,42 @@ import template from './mail-list.template.html';
 import './mail-list.css';
 
 class MailList {
-    constructor (mailListService) {
-        this.mailService = mailListService;
+    constructor (mailListService, loginService, $scope) {
+        this.mailListService = mailListService;
+        this.login = loginService;
+        this.$scope = $scope;
     }
 
     $onInit () {
-        this.loadMails()
-            .then(mails => {
-                this.mails = mails;
-            });
+        this.login.subscribe(logged => {
+            if (logged) {
+                this.onLogin();
+            }
+        });
+
+        if (this.login.isLogged()) {
+            this.loadMails();
+
+            return;
+        }
     }
 
-    loadMails () {
-        return this.mailService
+    onLogin() {
+        this.loadMails();
+    }
+
+    loadMails() {
+        return this.mailListService
             .load()
             .then(mails => {
                 // group by date
-                // check gapi response first
 
                 return mails;
+            })
+            .then(mails => {
+                this.$scope.$apply(() => {
+                    this.mails = mails;
+                });
             });
     }
 }

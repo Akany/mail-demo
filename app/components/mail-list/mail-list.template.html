@@ -1,6 +1,6 @@
 <div layout="column" layout-padding>
     <md-whiteframe class="md-whiteframe-1dp mail-list-item" layout="row" layout-align="start center" ng-repeat="mail in $ctrl.mails">
-        <span class="mail-title" ng-bind="::mail.title" flex></span>
-        <span ng-bind="::mail.text" flex></span>
+        <span class="mail-title" ng-bind="::mail.from" flex></span>
+        <span ng-bind="::mail.subject" flex></span>
     </md-whiteframe>
 </div>

@@ -9,15 +9,20 @@ const mock = [{
     text: 'Content of mail 3'
 }];
 
-export default class {
-    constructor ($q) {
+export default class MailListService {
+    constructor($q, mailService) {
         this.$q = $q;
+        this.mailService = mailService;
     }
 
-    load () {
-        /*
-            Request google mails
-        */
-        return this.$q.when(mock);
+    load() {
+        return this.mailService.getMails(10)
+            .then(mails => {
+                const mailsPromise = mails.map(mail => {
+                    return this.mailService.getMail(mail.id);
+                });
+                
+                return this.$q.all(mailsPromise);
+            });
     }
 }

@@ -1,19 +1,23 @@
 import template from './sign-in.template.html';
 
 class SignIn {
-    constructor (gapiService) {
-        this.gapi = gapiService;
+    constructor (loginService) {
+        this.loginService = loginService;
         this.id = 'signInButton';
     }
 
-    $onInit () {
-        this.gapi.init()
-            .then(()=> this.gapi.render(this.id))
-            .then(this.onLogin);
+    $onInit() {
+        this.loginService
+            .subscribe(logged => this.onLoginChange(login));
     }
 
-    onLogin (auth) {
-        console.log(auth);
+    login() {
+        this.loginService
+            .login();
+    }
+
+    onLoginChange(logged) {
+        // update button
     }
 }
 
