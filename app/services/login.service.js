@@ -1,11 +1,16 @@
 export default class Login {
-    constructor(gapiService) {
+    constructor(gapiService, $rootScope) {
         this.gapi = gapiService.gapi;
+        this.$rootScope = $rootScope;
     }
 
     subscribe(callback) {
         this.gapi.auth2.getAuthInstance()
-            .isSignedIn.listen(callback);
+            .isSignedIn.listen(logged => {
+                this.$rootScope.$apply(() => {
+                    callback(logged);
+                });
+            });
     }
 
     isLogged() {
@@ -17,5 +22,11 @@ export default class Login {
         return this.gapi.auth2
             .getAuthInstance()
             .signIn();
+    }
+
+    logout() {
+        return this.gapi.auth2
+            .getAuthInstance()
+            .signOut();
     }
 }

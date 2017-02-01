@@ -12,7 +12,11 @@ class MailList {
         this.login.subscribe(logged => {
             if (logged) {
                 this.onLogin();
+
+                return;
             }
+
+            this.onLogout();
         });
 
         if (this.login.isLogged()) {
@@ -24,6 +28,10 @@ class MailList {
 
     onLogin() {
         this.loadMails();
+    }
+
+    onLogout() {
+        this.mails = [];
     }
 
     loadMails() {

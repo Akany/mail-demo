@@ -1,0 +1,9 @@
+html, body {
+    position: initial;
+}
+
+app mail-list {
+    width: 80%;
+    margin: 0px auto;
+    display: block;
+}

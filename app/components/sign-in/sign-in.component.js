@@ -3,12 +3,13 @@ import template from './sign-in.template.html';
 class SignIn {
     constructor (loginService) {
         this.loginService = loginService;
-        this.id = 'signInButton';
     }
 
     $onInit() {
         this.loginService
-            .subscribe(logged => this.onLoginChange(login));
+            .subscribe(logged => this.onLoginChange(logged));
+
+        this.onLoginChange(this.loginService.isLogged());
     }
 
     login() {
@@ -16,8 +17,13 @@ class SignIn {
             .login();
     }
 
+    logout() {
+        this.loginService
+            .logout();
+    }
+
     onLoginChange(logged) {
-        // update button
+        this.logged = logged;
     }
 }
 

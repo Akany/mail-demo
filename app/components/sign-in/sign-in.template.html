@@ -1,3 +1,4 @@
-<div ng-click="$ctrl.login()">
-    Login
+<div ng-switch="$ctrl.logged">
+    <div ng-switch-when="false" ng-click="$ctrl.login()">Login</div>
+    <div ng-switch-when="true" ng-click="$ctrl.logout()">Logout</div>
 </div>

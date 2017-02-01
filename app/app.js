@@ -1,5 +1,6 @@
 import ng from 'angular';
 import template from './app.html';
+import './app.css';
 import headerComponent from './components/header/header.component';
 
 import listComponent from './components/mail-list/mail-list.component';
